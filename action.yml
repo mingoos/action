@@ -1,0 +1,48 @@
+name: '상위 액션'
+description: '상위 액션입니다'
+author: 'mingoos'
+
+inputs:
+  org:
+    description: ''
+    required: true
+  work-repo-token:
+    description: ''
+    required: true
+  work-repo-api-url:
+    description: ''
+    default: 'work-repo-api-url'
+  review-repo-owner:
+    description: ''
+    default: 'review-repo-owner'
+  review-repo-name:
+    description: ''
+    required: true
+  review-repo-token:
+    description: ''
+    required: true
+  review-repo-api-url:
+    description: ''
+    default: 'review-repo-api-url'
+  legacy:
+    description: ''
+    default: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 테스트
+      run: echo "${{ env.ORG }} ${{ env.WORK_REPO_TOKEN }} ${{ env.REVIEW_REPO_OWNER }} ${{ env.REVIEW_REPO_NAME }} ${{ env.REVIEW_REPO_TOKEN }} ${{ env.REVIEW_REPO_API_URL }} ${{ env.LEGACY }}"
+      shell: bash
+      env:
+        ORG: ${{ inputs.org }}
+        WORK_REPO_TOKEN: ${{ inputs.work-repo-token }}
+        REVIEW_REPO_OWNER: ${{ inputs.review-repo-owner }}
+        REVIEW_REPO_NAME: ${{ inputs.review-repo-name }}
+        REVIEW_REPO_TOKEN: ${{ inputs.review-repo-token }}
+        REVIEW_REPO_API_URL: ${{ inputs.review-repo-api-url }}
+        LEGACY: ${{ inputs.legacy }}
+    - name: 테스트 2
+      uses: mingoos/action/sub-action@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

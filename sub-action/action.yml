@@ -1,0 +1,7 @@
+name: '액션'
+description: '자동화 액션'
+author: 'mingoos'
+
+runs:
+  using: node20
+  main: dist/index.js
